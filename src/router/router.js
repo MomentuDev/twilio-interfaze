@@ -7,6 +7,9 @@ import MasiveCompania from '../views/MasiveCompany.vue';
 import MasiveNivelEstres from '../views/MasiveNivelEstres.vue';
 import Templates from '../views/Templates.vue';
 import Modulos from '../views/Modulos.vue';
+import MasiveModulos from '../views/MasiveModulos.vue';
+import MasiveCompaniaLink from '../views/MasiveCompanyLink.vue';
+import CargarUsuario from '../views/CargaUsuarios.vue';
 
 Vue.use(VueRouter);
 
@@ -45,6 +48,21 @@ const routes = [
     path: '/modulos',
     name: 'Modulos',
     component: Modulos,
+  },
+  {
+    path: '/modulosmasivo',
+    name: 'ModulosMasivos',
+    component: MasiveModulos,
+  },
+  {
+    path: '/masivelink',
+    name: 'MasivoLink',
+    component: MasiveCompaniaLink,
+  },
+  {
+    path: '/cargarusuarios',
+    name: 'CargarUsuarios',
+    component: CargarUsuario
   }
 ];
 

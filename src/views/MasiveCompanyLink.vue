@@ -4,7 +4,7 @@
       <sidebar></sidebar>
       <v-card outlined rounded class="mb-4" width="100%" height="100%">
         <v-card-title>
-          Envío másivo general compañía:
+          Envío másivo con link compañía:
         </v-card-title>
         <v-card-text>
           <strong>Mensajes envidados: </strong> {{messagesSent}}
@@ -39,6 +39,30 @@
                     hint="Selecciona los destinatarios"
                     persistent-hint
                   ></v-select>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col
+                  cols="12"
+                  sm="12"
+                >
+                  <v-text-field
+                    v-model="descripcion"
+                    label="Descripción"
+                    required
+                  ></v-text-field>
+                </v-col>
+              </v-row>
+              <v-row>
+                <v-col
+                  cols="12"
+                  sm="12"
+                >
+                  <v-text-field
+                    v-model="link"
+                    label="Link - URL"
+                    required
+                  ></v-text-field>
                 </v-col>
               </v-row>
               <v-btn
@@ -78,6 +102,8 @@ export default {
       selected: [],
       templates: [],
       selectedTemp: {},
+      descripcion: '',
+      link: '',
       date: "",
       time: "",
       messagesSent: 0,
@@ -99,7 +125,9 @@ export default {
           users.forEach((user) => {
             let newMessage = {
               message: this.selectedTemp.replace('{{1}}', user.nombre.trim())
-                .replace('{{2}}', user.compania.trim()),
+                .replace('{{2}}', user.compania.trim())
+                .replace('{{3}}', this.descripcion.trim())
+                .replace('{{4}}', this.link.trim()),
               from: from,
               to: user.indicativo+user.celular_ajustado
             }

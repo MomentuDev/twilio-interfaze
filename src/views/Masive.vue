@@ -87,7 +87,7 @@ export default {
         .then((res) => {
           this.users = res.data.users;
           this.users.forEach((user) => {
-            let sel = `${user.nombre}, ${user.indicativo}${user.celular_ajustado}`
+            let sel = `${user.nombre}, ${user.indicativo}${user.celular_ajustado}, ${user.compania}`
             this.selector.push(sel);
           })
         })
@@ -96,7 +96,7 @@ export default {
       if(this.selected.length > 0) {
         this.selected.forEach((sel) => {
           let newMessage = {
-            message: this.selectedTemp.replace('1', sel.split(',')[0].trim()).replace('2', sel.compania).toString(),
+            message: this.selectedTemp.replace('{{1}}', sel.split(',')[0].trim()).replace('{{2}}', sel.compania).toString(),
             from: from,
             to: sel.split(',')[1].trim()
           }

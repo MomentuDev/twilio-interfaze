@@ -73,28 +73,11 @@
           <v-col
             cols="12"
             sm="4"
+            v-for="(modulo, index) in user.modulos" :key="index"
           >
             <div class="ml-6 mt-3 mb-3">
               <span><v-icon class="mb-2 mr-3" color="light-blue darken-4">mdi-google-classroom</v-icon>
-              <b class="font-weight-medium">Modulo 1: </b> {{user.modulo_1}}</span>
-            </div>
-          </v-col>
-          <v-col
-            cols="12"
-            sm="4"
-          >
-            <div class="ml-6 mt-3 mb-3">
-              <span><v-icon class="mb-2 mr-3" color="light-blue darken-4">mdi-google-classroom</v-icon>
-              <b class="font-weight-medium">Modulo 2: </b>{{user.modulo_2}}</span>
-            </div>
-          </v-col>
-          <v-col
-            cols="12"
-            sm="4"
-          >
-            <div class="ml-6 mt-3 mb-3">
-              <span><v-icon class="mb-2 mr-3" color="light-blue darken-4">mdi-google-classroom</v-icon>
-              <b class="font-weight-medium">Modulo 3: </b>{{user.modulo_3}}</span>
+              <b class="font-weight-medium">Modulo {{index + 1}}: </b> {{modulo.modulo}}</span>
             </div>
           </v-col>
         </v-row>
@@ -157,7 +140,7 @@
 // @ is an alias to /src
 const axios = require('axios');
 const url = 'https://us-central1-utility-pad-293317.cloudfunctions.net/momentu';
-const from = '+14155238886';
+const from = '+5715800033';
 
 export default {
   name: 'Home',

@@ -9,6 +9,19 @@
                 <h1 class="display-2 text-center black--text font-weight-thin mt-12 mb-8">
                   Templates
                 </h1>
+                <h3>Tipo de template:</h3>
+                <p>
+                  Empresa: Envíos masivos genericos para empresas - e.g., Mensaje de bienvendia <br>
+                  Link: Envíos masivos con una descripción y link a empresas <br>
+                  Modulos: Envío automático del siguiente modulo a los miembros de las empresas seleccionadas
+                </p>
+                <h3>Significado:</h3>
+                <p>
+                  {{1}}: Nombre de la persona <br>
+                  {{2}}: Nombre compañia <br>
+                  {{3}}: Descripción o titulo del contenido <br>
+                  {{4}}: Link al contenido <br>
+                </p>
               </v-flex>
               <v-card class="mx-auto ma-4">
                 <v-btn

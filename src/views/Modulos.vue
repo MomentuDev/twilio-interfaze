@@ -90,6 +90,8 @@
                             </v-text-field>
                             <v-text-field v-model="capitulo.url" label="URL capitulo">
                             </v-text-field>
+                            <v-text-field v-model="capitulo.categoria" label="Categoría capitulo">
+                            </v-text-field>
                           </div>
                           <v-btn @click="addCapitulo">
                             Nuevo capitulo

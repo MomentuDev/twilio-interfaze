@@ -11,7 +11,7 @@
           icon
           @click.stop="mini = !mini"
         >
-          <v-icon>mdi-chevron-left</v-icon>
+          <v-icon>mdi-menu</v-icon>
         </v-btn>
       </v-list-item>
 
@@ -46,11 +46,14 @@ export default {
       drawer: true,
       items: [
         { title: 'Home', icon: 'mdi-home', link: '/' },
+        { title: 'Cargar Usuarios', icon: 'mdi-account-plus', link: '/cargarusuarios'},
         { title: 'Envío individual', icon: 'mdi-email-send', link: '/masive' },
-        { title: 'Masivo por compañía', icon: 'mdi-office-building', link: '/masivecompania' },
-        { title: 'Masivo nivel estres', icon: 'mdi-account-alert', link: '/masivenivelestres' },
+        { title: 'Modulos masivo', icon: 'mdi-office-building', link: '/modulosmasivo' },
+        { title: 'Masivo por compañía', icon: 'mdi-account-group', link: '/masivecompania' },
+        { title: 'Masivo Link', icon: 'mdi-link', link: '/masivelink' },
+        //{ title: 'Masivo nivel estres', icon: 'mdi-account-alert', link: '/masivenivelestres' },
         { title: 'Templates', icon: 'mdi-cellphone-message', link: '/templates' },
-        { title: 'Modulos', icon: 'mdi-book-open-blank-variant', link: '/modulos' },
+        { title: 'Modulos', icon: 'mdi-book-open-blank-variant', link: '/modulos' },        
       ],
       mini: true,
     };

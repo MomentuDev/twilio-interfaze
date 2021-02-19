@@ -81,13 +81,11 @@ export default {
         { text: 'Nombre', align: 'center', value: 'nombre' },
         { text: 'Correo', align: 'center', value: 'correo' },
         { text: 'Categoria', align: 'center', value: 'categoria' },
-        { text: 'Modulo 1', align: 'center', value: 'modulo_1' },
-        { text: 'Modulo 2', align: 'center', value: 'modulo_2' },
-        { text: 'Modulo 3', align: 'center', value: 'modulo_3' },
         { text: 'Pais', align: 'center', value: 'pais' },
         { text: 'Test', align: 'center', value: 'test' },
         { text: 'Compañia', align: 'center', value: 'compania' },
         { text: 'Ver Perfil', align: 'center', value: 'verPerfil' },
+        { text: 'Mensajes', align: 'center', value: 'mensajesSinLeer'}        
       ],
     };
   },

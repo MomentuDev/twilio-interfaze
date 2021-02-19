@@ -4,7 +4,7 @@
       <sidebar></sidebar>
       <v-card outlined rounded class="mb-4" width="100%" height="100%">
         <v-card-title>
-          Envío másivo general compañía:
+          Envío másivo módulos compañía:
         </v-card-title>
         <v-card-text>
           <strong>Mensajes envidados: </strong> {{messagesSent}}
@@ -16,24 +16,9 @@
                   sm="12"
                 >
                   <v-select
-                    v-model="selectedTemp"
-                    :items="templates"
-                    label="Select"
-                    chips
-                    hint="Selecciona el mensaje"
-                    persistent-hint
-                  ></v-select>
-                </v-col>
-              </v-row>
-              <v-row>
-                <v-col
-                  cols="12"
-                  sm="12"
-                >
-                  <v-select
                     v-model="selected"
                     :items="selector"
-                    label="Select"
+                    label="Empresa/s"
                     multiple
                     chips
                     hint="Selecciona los destinatarios"
@@ -76,10 +61,15 @@ export default {
       selector: [],
       companias: [],
       selected: [],
-      templates: [],
+      templates: {
+        OP: '',
+        Modulo: '',
+        Meditacion: '',
+      },
+      modulos: {},
       selectedTemp: {},
-      date: "",
-      time: "",
+      date: '',
+      time: '',
       messagesSent: 0,
     };
   },
@@ -92,34 +82,59 @@ export default {
           this.selector = Object.keys(this.compania);
         })
     },
+    getModulos() {
+      axios.get(url+'/modulos/')
+        .then((res) => {
+          let mods = res.data;
+          this.modulos = _.groupBy(mods.modulos, 'nombre');
+        })
+    },
     sendMessage() {
       if(this.selected.length > 0) {
         this.selected.forEach((sel) => {
           let users = this.compania[sel];
           users.forEach((user) => {
-            let newMessage = {
-              message: this.selectedTemp.replace('{{1}}', user.nombre.trim())
-                .replace('{{2}}', user.compania.trim()),
+            let moduloOb = null;
+            let capOb = 0;
+            user.modulos.forEach((mod) => {
+              let module = this.modulos[mod.modulo][0]
+              if(module.capitulos.length > mod.capitulos.length && moduloOb === null) {
+                moduloOb = module;
+                capOb = mod.capitulos.length;
+                mod.capitulos.push(module.capitulos[capOb].nombre);
+              }
+            })
+            if(moduloOb.capitulos[capOb].nombre != ''){
+              let newMessage = {
+              message: this.templates[moduloOb.capitulos[capOb].categoria].replace('{{1}}', user.nombre.trim())
+                .replace('{{2}}', user.compania.trim())
+                .replace('{{3}}', moduloOb.capitulos[capOb].nombre)
+                .replace('{{4}}', moduloOb.capitulos[capOb].url.trim()).toString(),
               from: from,
               to: user.indicativo+user.celular_ajustado
             }
-            console.log(newMessage)
+            //console.log(newMessage)
             axios.post(`${url}/twilio/sendmessage`, newMessage)
-              .then((res) => {
+              .then(() => {
                 this.messagesSent++;
-                console.log(res);
                 this.updateUser(user);
               })
+            }
           })                    
         })
       }
     },
     getTemplates() {
-      axios.get(url+'/templates/Empresa')
+      axios.get(url+'/templates/')
         .then((res) => {
-          let temps = res.data;
+          let temps = res.data.templates;
           temps.forEach((template) => {
-            this.templates.push(template.template.template);
+            let temp = template;
+            this.templates = {
+              OP: temp.category === 'OP' ? temp.template : this.templates.OP,
+              Modulo: temp.category === 'Modulo' ? temp.template : this.templates.Modulo,
+              Meditacion: temp.category === 'Meditacion' ? temp.template : this.templates.Meditacion
+            }
           })
         })
     },
@@ -130,6 +145,7 @@ export default {
   mounted() {
     this.getUsers();
     this.getTemplates();
+    this.getModulos();
   },
 };
 </script>
